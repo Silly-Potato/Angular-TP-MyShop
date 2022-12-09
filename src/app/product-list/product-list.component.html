@@ -1,0 +1,33 @@
+<h1 *ngIf="!changeText">Products</h1>
+<h1 *ngIf="changeText">Lots of suprises are waiting for you!</h1>
+
+<div *ngFor="let product of products">
+  <h3>
+    <a
+      [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]"
+    >
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <p *ngIf="product.specifications.description">
+    Description: {{ product.specifications.description }}
+  </p>
+
+  <button
+    type="button"
+    (mouseover)="changeText = true"
+    (mouseout)="changeText = false"
+    class="hover-class"
+    (click)="addToCart(product)"
+  >
+    Add To Cart
+  </button>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

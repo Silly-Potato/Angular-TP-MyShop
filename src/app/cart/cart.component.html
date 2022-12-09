@@ -1,0 +1,53 @@
+<h3>My Cart</h3>
+
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{ item.name }}</span>
+  <span>{{ '(' + item.specifications.color + ')' }}</span>
+  <span>{{ item.specifications.price | currency }}</span>
+  <span
+    class="
+      inline-flex
+      divide-x
+      overflow-hidden
+      rounded-md
+      border
+      bg-white
+      shadow-sm
+    "
+  >
+    <a
+      class="inline-block p-3 text-gray-700 hover:bg-gray-100 focus:relative"
+      title="remove One"
+      (click)="this.cartService.removeOne(item)"
+    >
+      -
+    </a>
+    <a class="inline-block p-3 text-gray-700">
+      {{ item.quantity }}
+    </a>
+
+    <a
+      class="inline-block p-3 text-gray-700 hover:bg-gray-100 focus:relative"
+      title="add One"
+      (click)="this.cartService.addToCart(item)"
+    >
+      +
+    </a>
+  </span>
+</div>
+
+<div class="p-6">
+  <span class="text-2xl">Your order: </span>
+  <div *ngFor="let item of items">
+    - {{ item.quantity }} {{ item.name }}:
+    {{ item.quantity * item.specifications.price | currency }}$
+  </div>
+  <br />
+  <hr />
+  Total : {{ this.cartService.getTotalPrice() }}$
+</div>
+
+<p *ngIf="items.length <= 0">
+  Your Cart is Empty! You can add products to your cart from the home page or
+  the product details page.
+</p>
